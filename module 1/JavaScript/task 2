@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Event Details</title>
+</head>
+<body>
+  <h1>Event Registration</h1>
+  <div id="eventInfo"></div>
+  <button id="registerBtn">Register</button>
+  <button id="cancelBtn">Cancel Registration</button>
+
+  <script>
+    // Constants for event name and date (won't change)
+    const eventName = "Community Cleanup";
+    const eventDate = "2025-06-15";
+
+    // Seats available (mutable)
+    let seatsAvailable = 10;
+
+    const eventInfoDiv = document.getElementById('eventInfo');
+    const registerBtn = document.getElementById('registerBtn');
+    const cancelBtn = document.getElementById('cancelBtn');
+
+    // Function to display event info using template literals
+    function displayEventInfo() {
+      eventInfoDiv.innerHTML = `
+        <p><strong>Event:</strong> ${eventName}</p>
+        <p><strong>Date:</strong> ${eventDate}</p>
+        <p><strong>Seats Available:</strong> ${seatsAvailable}</p>
+      `;
+    }
+
+    // Initial display
+    displayEventInfo();
+
+    // Register button decreases seats by 1 using --
+    registerBtn.addEventListener('click', () => {
+      if (seatsAvailable > 0) {
+        seatsAvailable--;
+        displayEventInfo();
+        alert("Registration successful!");
+      } else {
+        alert("Sorry, no seats available.");
+      }
+    });
+
+    // Cancel button increases seats by 1 using ++
+    cancelBtn.addEventListener('click', () => {
+      seatsAvailable++;
+      displayEventInfo();
+      alert("Registration canceled.");
+    });
+  </script>
+</body>
+</html>
