@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CSS Inclusion Methods</title>
+
+  <!-- Internal CSS (embedded style) -->
+  <style>
+    /* Internal styles */
+    body {
+      background-color: #f0f8ff; /* Light blue background */
+    }
+  </style>
+
+  <!-- External CSS -->
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- Inline style -->
+  <h1 style="color: red;">This heading is red (inline style)</h1>
+
+  <h2>This heading uses external stylesheet styles</h2>
+
+  <p>This paragraph also uses styles from the external stylesheet.</p>
+
+</body>
+</html>
