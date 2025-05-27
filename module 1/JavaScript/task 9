@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Async JS: Fetch Events</title>
+<style>
+  #spinner {
+    display: none;
+    font-weight: bold;
+    margin: 20px 0;
+  }
+  .event {
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 5px;
+  }
+</style>
+</head>
+<body>
+
+<h1>Events List</h1>
+
+<div id="spinner">Loading events...</div>
+<div id="eventsContainer"></div>
+
+<button id="fetchThen">Fetch with .then()</button>
+<button id="fetchAsync">Fetch with async/await</button>
+
+<script>
+  const eventsContainer = document.getElementById('eventsContainer');
+  const spinner = document.getElementById('spinner');
+
+  const mockApiUrl = 'https://jsonplaceholder.typicode.com/posts?_limit=5'; 
+  // Using JSONPlaceholder for demo; treat posts as events
+
+  // --- Fetch with .then() & .catch() ---
+  function fetchEventsThen() {
+    spinner.style.display = 'block';
+    eventsContainer.innerHTML = '';
+
+    fetch(mockApiUrl)
+      .then(response => {
+        if (!response.ok) throw new Error('Network response was not ok');
+        return response.json();
+      })
+      .then(data => {
+        spinner.style.display = 'none';
+        displayEvents(data);
+      })
+      .catch(error => {
+        spinner.style.display = 'none';
+        eventsContainer.innerHTML = `<p style="color:red;">Error: ${error.message}</p>`;
+      });
+  }
+
+  // --- Fetch with async/await ---
+  async function fetchEventsAsync() {
+    spinner.style.display = 'block';
+    eventsContainer.innerHTML = '';
+    try {
+      const response = await fetch(mockApiUrl);
+      if (!response.ok) throw new Error('Network response was not ok');
+      const data = await response.json();
+      spinner.style.display = 'none';
+      displayEvents(data);
+    } catch (error) {
+      spinner.style.display = 'none';
+      eventsContainer.innerHTML = `<p style="color:red;">Error: ${error.message}</p>`;
+    }
+  }
+
+  // Utility: Display events on page
+  function displayEvents(events) {
+    if (!events.length) {
+      eventsContainer.innerHTML = '<p>No events found.</p>';
+      return;
+    }
+    events.forEach(event => {
+      const div = document.createElement('div');
+      div.className = 'event';
+      div.innerHTML = `<h3>${event.title}</h3><p>${event.body}</p>`;
+      eventsContainer.appendChild(div);
+    });
+  }
+
+  // Buttons wired up
+  document.getElementById('fetchThen').onclick = fetchEventsThen;
+  document.getElementById('fetchAsync').onclick = fetchEventsAsync;
+</script>
+
+</body>
+</html>
