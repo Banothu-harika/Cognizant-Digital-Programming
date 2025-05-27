@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>jQuery Event Example</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <style>
+    .event-card {
+      display: none;
+      width: 250px;
+      padding: 15px;
+      border: 1px solid #007bff;
+      border-radius: 10px;
+      margin: 10px auto;
+      background-color: #f0f8ff;
+    }
+  </style>
+</head>
+<body>
+
+  <button id="registerBtn">Register for Event</button>
+
+  <div class="event-card">
+    <h3>Music Night</h3>
+    <p>Join us for live music and entertainment!</p>
+  </div>
+
+  <script>
+    $(document).ready(function() {
+      // Handle click on register button
+      $('#registerBtn').click(function() {
+        $('.event-card').fadeIn(800); // Show with fade effect
+        alert("You’ve registered!");
+        
+        // Optional: fade out the card after 5 seconds
+        setTimeout(() => {
+          $('.event-card').fadeOut(800);
+        }, 5000);
+      });
+    });
+  </script>
+
+</body>
+</html>
