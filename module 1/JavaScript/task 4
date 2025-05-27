@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Functions, Scope, Closures, Higher-Order Functions</title>
+</head>
+<body>
+  <h1>Event Manager</h1>
+  <div id="eventList"></div>
+
+<script>
+  // Array to hold all events
+  const events = [];
+
+  // addEvent: Adds a new event object to events list
+  function addEvent(name, date, category, seats) {
+    const newEvent = { id: events.length + 1, name, date, category, seats, registrations: 0 };
+    events.push(newEvent);
+    return newEvent;
+  }
+
+  // registerUser: Returns a function to register users and track total registrations for a category (closure)
+  function registerUser(category) {
+    let totalRegistrations = 0; // closure variable
+
+    return function(eventId) {
+      const event = events.find(e => e.id === eventId && e.category === category);
+      if (!event) {
+        console.log(`No event found with id ${eventId} in category "${category}"`);
+        return false;
+      }
+      if (event.seats <= event.registrations) {
+        console.log(`Event "${event.name}" is full`);
+        return false;
+      }
+      event.registrations++;
+      totalRegistrations++;
+      console.log(`Registered for "${event.name}". Total registrations in ${category}: ${totalRegistrations}`);
+      return true;
+    };
+  }
+
+  // filterEventsByCategory: Higher-order function accepting a callback for filtering
+  function filterEventsByCategory(callback) {
+    return events.filter(callback);
+  }
+
+  // Usage:
+
+  // Add some events
+  addEvent("Art Workshop", "2025-08-01", "arts", 10);
+  addEvent("Jazz Night", "2025-08-05", "music", 20);
+  addEvent("Photography Walk", "2025-08-10", "arts", 5);
+  addEvent("Rock Concert", "2025-08-20", "music", 0); // full
+
+  // Create a register function for 'arts' category
+  const registerArts = registerUser("arts");
+
+  // Register for event id=1 (Art Workshop)
+  registerArts(1); // logs registration info
+  registerArts(3); // register for Photography Walk
+
+  // Filter arts events only
+  const artsEvents = filterEventsByCategory(event => event.category === "arts");
+
+  // Display filtered events
+  const eventList = document.getElementById("eventList");
+  eventList.innerHTML = "<h2>Arts Events:</h2>";
+  artsEvents.forEach(e => {
+    eventList.innerHTML += `<p>${e.name} (${e.date}) - Seats: ${e.seats}, Registered: ${e.registrations}</p>`;
+  });
+
+  // Bonus: Register for an event that doesn't exist or is full
+  registerArts(999);   // no event found
+  registerArts(4);     // event full
+
+</script>
+</body>
+</html>
