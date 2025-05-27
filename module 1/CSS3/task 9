@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Multi-Column News Article</title>
+  <style>
+    .news-article {
+      column-count: 2;            /* Two columns */
+      column-gap: 30px;           /* Gap between columns */
+      column-rule: 1px solid gray; /* Vertical line between columns */
+      padding: 20px;
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+
+<section class="news-article">
+  <h2>Community Bulletin</h2>
+  <p>
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus 
+    rhoncus, lorem in vestibulum imperdiet, velit elit condimentum nulla, 
+    vel sagittis lacus quam eu eros. Vivamus semper, arcu sed varius pulvinar, 
+    enim elit mollis massa, a varius massa libero nec velit. Integer consequat 
+    dictum risus, at maximus lorem malesuada eu. Curabitur eu est sed nibh 
+    commodo dictum. 
+  </p>
+  <p>
+    Nulla facilisi. Praesent at rhoncus libero. Mauris et lorem maximus, 
+    dictum erat ut, bibendum neque. Vestibulum rutrum justo at efficitur 
+    gravida. Fusce a velit risus. Donec dignissim, purus quis dignissim 
+    vulputate, elit augue convallis ex, nec dictum orci nibh vitae tortor.
+  </p>
+  <p>
+    Sed at dignissim sapien. Vestibulum ante ipsum primis in faucibus orci 
+    luctus et ultrices posuere cubilia curae; Nam mattis enim vitae 
+    hendrerit dictum. Fusce vitae convallis leo. Etiam in diam sed urna 
+    blandit commodo.
+  </p>
+</section>
+
+</body>
+</html>
