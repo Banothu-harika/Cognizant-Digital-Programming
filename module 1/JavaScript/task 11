@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Event Registration Form</title>
+  <style>
+    .error {
+      color: red;
+      font-size: 0.9em;
+    }
+    form {
+      max-width: 400px;
+      margin: 30px auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+
+  <form id="registrationForm">
+    <h2>Event Registration</h2>
+    
+    <label for="name">Name:</label><br />
+    <input type="text" name="name" id="name" /><br />
+    <span class="error" id="nameError"></span><br />
+
+    <label for="email">Email:</label><br />
+    <input type="email" name="email" id="email" /><br />
+    <span class="error" id="emailError"></span><br />
+
+    <label for="event">Select Event:</label><br />
+    <select name="event" id="event">
+      <option value="">-- Choose an event --</option>
+      <option value="music">Music Night</option>
+      <option value="art">Art Workshop</option>
+      <option value="tech">Tech Meetup</option>
+    </select><br />
+    <span class="error" id="eventError"></span><br /><br />
+
+    <button type="submit">Register</button>
+  </form>
+
+  <script>
+    const form = document.getElementById("registrationForm");
+
+    form.addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      // Clear previous errors
+      document.getElementById("nameError").textContent = "";
+      document.getElementById("emailError").textContent = "";
+      document.getElementById("eventError").textContent = "";
+
+      const { name, email, event: eventSelect } = form.elements;
+
+      let isValid = true;
+
+      // Validation
+      if (name.value.trim() === "") {
+        document.getElementById("nameError").textContent = "Name is required.";
+        isValid = false;
+      }
+
+      if (email.value.trim() === "" || !email.value.includes("@")) {
+        document.getElementById("emailError").textContent = "Valid email is required.";
+        isValid = false;
+      }
+
+      if (eventSelect.value === "") {
+        document.getElementById("eventError").textContent = "Please select an event.";
+        isValid = false;
+      }
+
+      if (isValid) {
+        alert(`Thank you, ${name.value}, for registering for the ${eventSelect.value} event!`);
+        form.reset();
+      }
+    });
+  </script>
+
+</body>
+</html>
