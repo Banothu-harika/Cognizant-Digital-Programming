@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Event Handling Example</title>
+<style>
+  .event-card {
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    padding: 12px;
+    margin: 10px 0;
+    background-color: #f9f9f9;
+  }
+  button {
+    margin-right: 8px;
+  }
+  #filterSection {
+    margin-bottom: 20px;
+  }
+</style>
+</head>
+<body>
+
+<h1>Community Events</h1>
+
+<div id="filterSection">
+  <label for="categoryFilter">Filter by Category:</label>
+  <select id="categoryFilter">
+    <option value="all">All</option>
+    <option value="music">Music</option>
+    <option value="art">Art</option>
+    <option value="tech">Tech</option>
+  </select>
+
+  <label for="searchInput" style="margin-left:20px;">Search by Name:</label>
+  <input type="text" id="searchInput" placeholder="Type event name..." />
+</div>
+
+<div id="eventsContainer"></div>
+
+<script>
+  const events = [
+    { id: 1, name: "Music Fest", category: "music", seats: 5 },
+    { id: 2, name: "Art Workshop", category: "art", seats: 3 },
+    { id: 3, name: "Tech Conference", category: "tech", seats: 10 },
+    { id: 4, name: "Jazz Night", category: "music", seats: 8 },
+    { id: 5, name: "Painting 101", category: "art", seats: 0 },
+  ];
+
+  const container = document.querySelector('#eventsContainer');
+  const categoryFilter = document.querySelector('#categoryFilter');
+  const searchInput = document.querySelector('#searchInput');
+
+  // Current filters
+  let currentCategory = 'all';
+  let currentSearch = '';
+
+  function renderEvents() {
+    container.innerHTML = '';
+
+    // Filter by category and search term
+    const filteredEvents = events.filter(event => {
+      const matchesCategory = currentCategory === 'all' || event.category === currentCategory;
+      const matchesSearch = event.name.toLowerCase().includes(currentSearch.toLowerCase());
+      return matchesCategory && matchesSearch;
+    });
+
+    if (filteredEvents.length === 0) {
+      container.textContent = 'No events found.';
+      return;
+    }
+
+    filteredEvents.forEach(event => {
+      const card = document.createElement('div');
+      card.className = 'event-card';
+
+      const title = document.createElement('h3');
+      title.textContent = event.name;
+      card.appendChild(title);
+
+      const seats = document.createElement('p');
+      seats.textContent = `Seats available: ${event.seats}`;
+      card.appendChild(seats);
+
+      const registerBtn = document.createElement('button');
+      registerBtn.textContent = 'Register';
+      registerBtn.disabled = event.seats <= 0;
+      registerBtn.onclick = () => registerUser(event.id);
+      card.appendChild(registerBtn);
+
+      container.appendChild(card);
+    });
+  }
+
+  function registerUser(eventId) {
+    const event = events.find(e => e.id === eventId);
+    if (event && event.seats > 0) {
+      event.seats--;
+      alert(`Registered for ${event.name}! Seats left: ${event.seats}`);
+      renderEvents(); // Update UI
+    } else {
+      alert('No seats available!');
+    }
+  }
+
+  // Event handlers for filters
+  categoryFilter.onchange = (e) => {
+    currentCategory = e.target.value;
+    renderEvents();
+  };
+
+  searchInput.onkeydown = (e) => {
+    // Delay filtering until keyup for better UX (optional)
+    setTimeout(() => {
+      currentSearch = e.target.value;
+      renderEvents();
+    }, 0);
+  };
+
+  // Initial render
+  renderEvents();
+</script>
+
+</body>
+</html>
