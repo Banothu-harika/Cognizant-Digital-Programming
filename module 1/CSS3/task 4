@@ -1,0 +1,27 @@
+/* Fallback background color with background image on body */
+body {
+  background-color: #0a3d62; /* Fallback dark blue HEX */
+  background-image: url('cityscape.jpg'); /* Replace with your image path */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: rgba(255, 255, 255, 0.9); /* Slightly transparent white text */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 20px;
+}
+
+/* Section headers with gradient background */
+.section-header {
+  font-size: 2rem;
+  font-weight: bold;
+  padding: 12px 20px;
+  color: #fff;
+  
+  /* Linear gradient from teal to navy */
+  background: linear-gradient(90deg, #008080, #001f3f);
+  
+  /* Optional: rounded corners */
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
