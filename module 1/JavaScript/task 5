@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Objects and Prototypes Example</title>
+</head>
+<body>
+  <h1>Event Objects and Prototypes</h1>
+  <div id="output"></div>
+
+<script>
+  // Define Event class
+  class Event {
+    constructor(name, date, seats) {
+      this.name = name;
+      this.date = new Date(date);
+      this.seats = seats;
+      this.registered = 0;
+    }
+
+    // Prototype method to check seat availability
+    checkAvailability() {
+      return this.registered < this.seats;
+    }
+
+    // Method to register a user if seats are available
+    register() {
+      if (this.checkAvailability()) {
+        this.registered++;
+        return true;
+      } else {
+        return false;
+      }
+    }
+  }
+
+  // Create some event objects
+  const event1 = new Event("Community Meetup", "2025-06-15", 100);
+  const event2 = new Event("Tech Talk", "2025-07-01", 50);
+
+  // Register a few users
+  event1.register();
+  event1.register();
+  event2.register();
+
+  // Output event details with keys and values using Object.entries()
+  const output = document.getElementById("output");
+
+  [event1, event2].forEach((ev, index) => {
+    let html = `<h3>Event ${index + 1}: ${ev.name}</h3><ul>`;
+    for (const [key, value] of Object.entries(ev)) {
+      html += `<li><strong>${key}:</strong> ${value}</li>`;
+    }
+    html += `<li><strong>Seats Available:</strong> ${ev.checkAvailability() ? 'Yes' : 'No'}</li>`;
+    html += `</ul>`;
+    output.innerHTML += html;
+  });
+</script>
+</body>
+</html>
