@@ -1,0 +1,21 @@
+import java.io.*;
+import java.net.*;
+
+public class Server {
+    public static void main(String[] args) throws IOException {
+        ServerSocket server = new ServerSocket(5000);
+        Socket socket = server.accept();
+        BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+        PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
+
+        BufferedReader userIn = new BufferedReader(new InputStreamReader(System.in));
+        String line;
+        while ((line = in.readLine()) != null) {
+            System.out.println("Client: " + line);
+            out.println("Server Echo: " + line);
+        }
+
+        socket.close();
+        server.close();
+    }
+}
