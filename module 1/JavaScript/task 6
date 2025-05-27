@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Arrays and Methods - Community Events</title>
+<style>
+  .event-card {
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    padding: 12px;
+    margin: 10px 0;
+    background-color: #f9f9f9;
+  }
+</style>
+</head>
+<body>
+
+<h1>Community Events</h1>
+<div id="eventsContainer"></div>
+
+<script>
+  // Initial array of events
+  let events = [
+    { name: "Music Fest", category: "music", date: "2025-07-20" },
+    { name: "Art Workshop", category: "art", date: "2025-07-25" },
+    { name: "Tech Conference", category: "technology", date: "2025-08-05" }
+  ];
+
+  // Add new events using .push()
+  events.push({ name: "Jazz Night", category: "music", date: "2025-08-10" });
+  events.push({ name: "Baking Workshop", category: "cooking", date: "2025-08-12" });
+
+  // Filter only music events
+  const musicEvents = events.filter(event => event.category === "music");
+
+  // Use .map() to format display cards
+  const eventCards = musicEvents.map(event => {
+    return `
+      <div class="event-card">
+        <h3>🎵 ${event.name}</h3>
+        <p>Category: ${event.category.charAt(0).toUpperCase() + event.category.slice(1)}</p>
+        <p>Date: ${new Date(event.date).toLocaleDateString()}</p>
+      </div>
+    `;
+  });
+
+  // Output the cards to the container
+  document.getElementById('eventsContainer').innerHTML = eventCards.join('');
+</script>
+
+</body>
+</html>
