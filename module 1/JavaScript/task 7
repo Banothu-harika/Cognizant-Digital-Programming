@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>DOM Manipulation - Community Events</title>
+<style>
+  .event-card {
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    padding: 12px;
+    margin: 10px 0;
+    background-color: #f9f9f9;
+  }
+  button {
+    margin-right: 8px;
+  }
+</style>
+</head>
+<body>
+
+<h1>Community Events</h1>
+<div id="eventsContainer"></div>
+
+<script>
+  // Sample events array
+  let events = [
+    { id: 1, name: "Music Fest", seats: 5 },
+    { id: 2, name: "Art Workshop", seats: 3 },
+    { id: 3, name: "Tech Conference", seats: 10 }
+  ];
+
+  // Reference to container
+  const container = document.querySelector('#eventsContainer');
+
+  // Function to render events
+  function renderEvents() {
+    container.innerHTML = ''; // Clear existing content
+
+    events.forEach(event => {
+      const card = document.createElement('div');
+      card.className = 'event-card';
+
+      const title = document.createElement('h3');
+      title.textContent = event.name;
+      card.appendChild(title);
+
+      const seats = document.createElement('p');
+      seats.textContent = `Seats available: ${event.seats}`;
+      seats.id = `seats-${event.id}`;
+      card.appendChild(seats);
+
+      // Register button
+      const registerBtn = document.createElement('button');
+      registerBtn.textContent = 'Register';
+      registerBtn.disabled = event.seats <= 0;
+      registerBtn.addEventListener('click', () => registerUser(event.id));
+      card.appendChild(registerBtn);
+
+      // Cancel button
+      const cancelBtn = document.createElement('button');
+      cancelBtn.textContent = 'Cancel Registration';
+      cancelBtn.disabled = event.seats === 10; // max seats example
+      cancelBtn.addEventListener('click', () => cancelRegistration(event.id));
+      card.appendChild(cancelBtn);
+
+      container.appendChild(card);
+    });
+  }
+
+  // Register user (decrement seats)
+  function registerUser(eventId) {
+    const event = events.find(e => e.id === eventId);
+    if (event && event.seats > 0) {
+      event.seats--;
+      updateSeatsUI(event);
+    } else {
+      alert('No seats available!');
+    }
+  }
+
+  // Cancel registration (increment seats)
+  function cancelRegistration(eventId) {
+    const event = events.find(e => e.id === eventId);
+    if (event && event.seats < 10) {
+      event.seats++;
+      updateSeatsUI(event);
+    } else {
+      alert('No registrations to cancel!');
+    }
+  }
+
+  // Update seats display and button states
+  function updateSeatsUI(event) {
+    const seatsText = document.querySelector(`#seats-${event.id}`);
+    seatsText.textContent = `Seats available: ${event.seats}`;
+
+    // Re-render buttons disabled state
+    renderEvents();
+  }
+
+  // Initial render
+  renderEvents();
+
+</script>
+
+</body>
+</html>
