@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Event Promo Video with Media Events</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 600px;
+      margin: 30px auto;
+      padding: 20px;
+      background: #f0f0f0;
+    }
+    #videoMessage {
+      margin-top: 10px;
+      font-weight: bold;
+      color: green;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Event Promo Video</h2>
+  
+  <!-- Video element with controls and oncanplay event -->
+  <video id="promoVideo" width="100%" controls oncanplay="videoReady()">
+    <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.webm" type="video/webm" />
+    <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" type="video/mp4" />
+    Your browser does not support the video tag.
+  </video>
+  
+  <div id="videoMessage"></div>
+  
+  <form id="eventForm">
+    <h3>Event Registration</h3>
+    <label for="name">Name:</label>
+    <input id="name" name="name" type="text" placeholder="Your name" required />
+    
+    <label for="email">Email:</label>
+    <input id="email" name="email" type="email" placeholder="Your email" required />
+    
+    <button type="submit">Submit</button>
+  </form>
+
+  <script>
+    // Show message when video is ready to play
+    function videoReady() {
+      document.getElementById('videoMessage').textContent = "Video ready to play";
+    }
+
+    // Warn user if they try to leave page with unfinished form
+    window.onbeforeunload = function(event) {
+      const form = document.getElementById('eventForm');
+      // Check if form is dirty (any input filled)
+      if (form.name.value.trim() !== '' || form.email.value.trim() !== '') {
+        const message = "You have unsaved changes, are you sure you want to leave?";
+        event.returnValue = message;  // For most browsers
+        return message;               // For some older browsers
+      }
+      // No message if form is empty
+    };
+  </script>
+
+</body>
+</html>
