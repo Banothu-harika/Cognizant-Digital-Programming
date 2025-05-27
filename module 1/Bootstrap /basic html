@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bootstrap 5 Local Files Example</title>
+  <!-- Bootstrap 5 CSS (Local) -->
+  <link rel="stylesheet" href="css/bootstrap.min.css" />
+</head>
+<body>
+  <div class="container text-center mt-5">
+    <h1 class="text-success">Hello, Bootstrap 5 via Local Files!</h1>
+    <p>This page uses Bootstrap 5 linked from downloaded files.</p>
+  </div>
+
+  <!-- Bootstrap 5 JS Bundle with Popper (Local) -->
+  <script src="js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
