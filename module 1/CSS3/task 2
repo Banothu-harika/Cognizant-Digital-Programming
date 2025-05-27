@@ -1,0 +1,59 @@
+/* styles.css */
+
+/* ============================= */
+/* Styles for Main Call-to-Action */
+/* ============================= */
+
+/* Style for main CTA button */
+.cta-button {
+  background-color: #007BFF; /* Bootstrap primary blue */
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 6px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+/* Hover effect for CTA button */
+.cta-button:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}
+
+/* ============================= */
+/* Styles for Navigation Bar */
+/* ============================= */
+
+/* Navigation bar container */
+.navbar {
+  background-color: #f8f9fa; /* Light grey background */
+  padding: 10px 20px;
+  border-bottom: 1px solid #ddd;
+}
+
+/* Navigation links */
+.navbar a {
+  color: #333;
+  text-decoration: none;
+  margin-right: 15px;
+  font-weight: 500;
+}
+
+/* Navigation links hover effect */
+.navbar a:hover {
+  color: #007BFF;
+}
+
+/* ============================= */
+/* Styles for Footer */
+/* ============================= */
+
+/* Footer container */
+.footer {
+  background-color: #222;
+  color: #ccc;
+  padding: 20px;
+  text-align: center;
+  font-size: 0.9rem;
+}
