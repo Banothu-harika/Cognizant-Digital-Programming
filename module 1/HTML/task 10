@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Debugging Example</title>
+  <style>
+    /* Initial styles */
+    #content {
+      width: 300px;
+      height: 150px;
+      background-color: lightblue;
+      padding: 20px;
+      margin: 20px auto;
+      text-align: center;
+      border: 2px solid navy;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Layout Section -->
+  <div id="content">
+    <h2>Debug Me!</h2>
+    <p id="message">This is a message.</p>
+    <button id="btn">Click me</button>
+  </div>
+
+  <script>
+    // Log message on page load
+    console.log('Page loaded.');
+
+    // Add click event listener
+    document.getElementById('btn').addEventListener('click', function() {
+      console.log('Button clicked.');
+
+      // Intentionally cause an error to demonstrate debugging
+      try {
+        // This function is not defined, triggers ReferenceError
+        nonExistentFunction();
+      } catch (error) {
+        console.error('Caught an error:', error);
+        document.getElementById('message').textContent = 'Oops! Something went wrong.';
+      }
+
+      // Change background color on button click
+      const contentDiv = document.getElementById('content');
+      contentDiv.style.backgroundColor = 'lightgreen';
+    });
+  </script>
+
+</body>
+</html>
